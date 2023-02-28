@@ -1,0 +1,145 @@
+.logo{
+  margin-top: 15px;
+  margin-bottom: 100px;
+}
+.authorization__container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background: #202021;
+  width: 100%;
+  z-index: 1000;
+  min-height: 100vh;
+  position: relative;
+  margin-top: -50px;
+}
+.authorization__title{
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 110%;
+  color: #EBEBEB;
+}
+.form__container{
+  margin-top: 77px;
+}
+.form__list{
+  position: relative;
+}
+.password{
+  margin-top: 65px;
+}
+.label__info{
+  outline: none;
+  border: none;
+  width: 295px;
+  height: 28px;
+  border-bottom: 0.5px solid #BDBDBD;
+  background-color: transparent;
+  caret-color: #007AFF;
+  color: #EBEBEB;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+}
+.authorization__label{
+  position: relative;
+}
+.button__password{
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  right: 2px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  top: -4px;
+}
+.label__span{
+  position: absolute;
+  left: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+  color: #BDBDBD;
+  top: -15px;
+}
+input:focus + .label__span,
+input:not(:placeholder-shown) + .label__span  {
+  top: -22px;
+  font-style: normal;
+  font-weight: 200;
+  font-size: 12px;
+  line-height: 120%;
+  letter-spacing: 0.01em;
+  color: #F2F2F2;
+  transition: all 0.2s ease-in-out;
+}
+.remember label{
+  display: flex;
+  margin-top: 24px;
+  align-items: center;
+  gap: 4px;
+  justify-content: flex-end;
+}
+.remember label .remember__p{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 150%;
+    text-align: center;
+    letter-spacing: -0.01em;
+    color: #828282;
+  }
+.remember label input{
+    width: 11px;
+    height: 11px;
+  }
+.email__clue{
+  font-style: normal;
+  font-weight: 300;
+  font-size: 10px;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  color: #828282;
+  position: absolute;
+  top: 28px;
+}
+.submit{
+  margin-top: 60px;
+  margin-bottom: 24px;
+  width: 295px;
+  height: 39px;
+  background: #00FBF4;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 110%;
+  color: #EBEBEB;
+  padding: 0;
+}
+.submit:disabled{
+  background: #2D2D2E;
+}
+.authorization__error{
+  font-style: normal;
+  font-weight: 300;
+  font-size: 10px;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  color:  #FC321D;
+  position: absolute;
+  top: 32px;
+}
