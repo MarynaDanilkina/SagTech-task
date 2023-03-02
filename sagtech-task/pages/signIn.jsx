@@ -2,7 +2,14 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import React, { useContext, createContext } from "react";
+import { useToast } from "@chakra-ui/core";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 import styles from "../styles/signin.module.css";
+
+const authContext = createContext();
+const useAuth = () => useContext(authContext);
 
 function SignIn() {
   const router = useRouter();
@@ -15,9 +22,16 @@ function SignIn() {
     mode: "onChange",
   });
   const onSubmit = (data) => {
-    reset();
-    console.log(data);
-    router.push("/");
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        reset();
+        router.push("/calendar");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
   };
 
   return (
@@ -86,6 +100,13 @@ function SignIn() {
           </button>
         </div>
       </form>
+      <button
+        type="button"
+        className={styles.button__register}
+        onClick={() => router.push("/register")}
+      >
+        Создать новый аккаунт
+      </button>
     </div>
   );
 }

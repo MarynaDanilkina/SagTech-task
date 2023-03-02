@@ -10,20 +10,29 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
+    "@chakra-ui/core": "^0.8.0",
+    "@emotion/core": "^10.3.1",
+    "@emotion/styled": "^10.3.0",
+    "@reduxjs/toolkit": "^1.9.3",
+    "emotion-theming": "^10.3.0",
     "eslint": "^8.35.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "firebase": "^9.17.1",
+    "firebase-admin": "^11.5.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.1.2",
     "next": "13.2.1",
     "next-images": "^1.8.4",
+    "nookies": "^2.5.2",
     "prettier": "^2.8.4",
+    "query-string": "^8.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-hook-form": "^7.43.2"
+    "react-hook-form": "^7.43.2",
+    "react-redux": "^8.0.5"
   },
   "devDependencies": {
     "eslint-config-next": "13.2.1"

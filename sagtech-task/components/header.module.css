@@ -18,3 +18,8 @@
   align-items: center;
   gap: 10px;
 }
+.button__logout{
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}

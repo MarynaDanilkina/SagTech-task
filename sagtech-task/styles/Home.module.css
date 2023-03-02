@@ -1,6 +1,5 @@
 .homepage__container{
   position: absolute;
-  background: #202021;
   z-index: 1000;
   display: flex;
   flex-direction: column;
@@ -10,6 +9,7 @@
   max-width: 762px;
   width: 80vw;
   top: 0px;
+  background: #f8f9f9;
 }
 .logo{
   margin-top: 75px;
@@ -25,7 +25,6 @@
   align-items: center;
   text-align: center;
   letter-spacing: 0.04em;
-  color: #4c5f83;
 }
 .button__container{
   display: flex;
@@ -35,6 +34,7 @@
   margin-bottom: 207px;
 }
 .button{
+  cursor: pointer;
   border: none;
   display: flex;
   flex-direction: row;
@@ -43,15 +43,12 @@
   gap: 10px;
   width: 295px;
   height: 39px;
-  background: #4c5f83;
+  background: #ff642c;
   border-radius: 20px;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
   line-height: 110%;
-  color: #202021;
-}
-.none{
-  display: none;
+  color: #ffc19c;
 }
