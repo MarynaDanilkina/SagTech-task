@@ -1,17 +1,18 @@
 import "../styles/globals.css";
 import Layout from "../components/Layout";
-import { ProvideAuth } from "../utils/auth";
-import { AuthProvider } from "@/contexts/AuthContext";
+import { Provider } from "react-redux";
+import store from '../toolkitRedux/index';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <AuthProvider>
-      <Layout>
-        <main>
-          <Component {...pageProps} />
-        </main>
-      </Layout>
-    </AuthProvider>
+    <Provider store={store}>
+        <Layout>
+          <main>
+            <Component {...pageProps} />
+          </main>
+        </Layout>
+    </Provider>
+    
   );
 }
 

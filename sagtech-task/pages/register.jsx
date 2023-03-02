@@ -2,11 +2,17 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import React, { createContext } from "react";
+import React, { createContext, useState } from "react";
+import { useSelector } from 'react-redux'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import styles from "../styles/signin.module.css";
+import { reduserSlice } from "@/toolkitRedux/toolkitReducer";
+import store from "@/toolkitRedux";
 
 function Register() {
+  const { error, user } = useSelector((state) => state.user);
+  const dispatch = store.dispatch;
+  const { setError } = reduserSlice.actions;
   const auth = getAuth();
   const router = useRouter();
   const {
@@ -19,7 +25,12 @@ function Register() {
   });
   const onSubmit = (data) => {
     createUserWithEmailAndPassword(auth, data.email, data.password)
-    reset();
+      .then(() => {
+        reset();
+        router.push("/calendar");
+      }).catch((error) => {
+        console.log(error)
+      });
   };
 
   return (
@@ -49,11 +60,6 @@ function Register() {
               {...register("email", {})}
             />
             <span className={styles.label__span}>Email:</span>
-            {isDirty && (
-              <p className={styles.email__clue}>
-                Введите e-mail, указанный при регистрации
-              </p>
-            )}
           </label>
           {errors?.email && (
             <p className={styles.authorization__error}>

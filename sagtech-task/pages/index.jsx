@@ -1,11 +1,27 @@
+import store from "@/toolkitRedux";
+import { reduserSlice } from "@/toolkitRedux/toolkitReducer";
 import Image from "next/image";
 import { useRouter } from "next/router";
-// import { useAuth } from "@/auth";
+import { useEffect } from "react";
+import { useSelector } from 'react-redux';
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../firebase";
 import styles from "../styles/home.module.css";
 
 function Home() {
+  const dispatch = store.dispatch;
+  const { setUser} = reduserSlice.actions;
   const router = useRouter();
-  // const { user } = useAuth();
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(setUser(user));
+        router.push("/calendar");
+      } else {
+        console.log('никто не вошел');
+      }
+    })
+  }, [])
   return (
     <div className={styles.homepage__container}>
       <Image

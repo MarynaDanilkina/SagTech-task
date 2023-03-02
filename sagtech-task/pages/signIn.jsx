@@ -4,14 +4,14 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import React, { useContext, createContext } from "react";
 import { useToast } from "@chakra-ui/core";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 import styles from "../styles/signin.module.css";
 
 const authContext = createContext();
 const useAuth = () => useContext(authContext);
 
 function SignIn() {
-  const auth = useAuth();
-  const toast = useToast();
   const router = useRouter();
   const {
     register,
@@ -21,23 +21,16 @@ function SignIn() {
   } = useForm({
     mode: "onChange",
   });
-  const onSubmit = ({ email, password }) => {
-    reset();
-    console.log(email);
-    console.log(password);
-    auth
-      .signin(email, pass)
-      .then(() => {
-        router.push("/deals");
+  const onSubmit = (data) => {
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        reset();
+        router.push("/calendar");
       })
       .catch((error) => {
-        toast({
-          title: "An error occurred.",
-          description: error.message,
-          status: "error",
-          duration: 9000,
-          isClosable: true,
-        });
+        const errorCode = error.code;
+        const errorMessage = error.message;
       });
   };
 
