@@ -28,17 +28,9 @@ function Header() {
             />
           </Link>
         </div>
-        {user ? (
-            <div className={styles.links}>
-              <button className={styles.button__logout} onClick={logout}>Выйти</button>
-            </div> 
-        ): (
           <div className={styles.links}>
-            <Link href="/signIn">Войти</Link>
-            <Link href="/register">Регистрация</Link>
+            <button className={styles.button__logout} onClick={logout}>Выйти</button>
           </div> 
-        )}
-        
       </nav>
     </header>
   );

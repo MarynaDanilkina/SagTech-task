@@ -17,3 +17,6 @@ body{
 p,h1,h2,h3,a{
   color: #494949;
 }
+.swiper-slide{
+  width: 50px !important;
+}

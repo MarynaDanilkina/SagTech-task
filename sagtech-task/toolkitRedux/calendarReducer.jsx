@@ -1,19 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 export const initialState = {
-  error: null,
-  user: null,
+  calendar: []
 };
 
-
 export const reduserSlice = createSlice({
-  name: "user",
+  name: "calendar",
   initialState,
   reducers: {
-    setError: (state, action) => {
-      state.error = action.payload;
-    },
-    setUser: (state, action) => {
-      state.user = action.payload;
+    setCalendar: (state, action) => {
+      state.calendar = action.payload;
     },
   }
 });
