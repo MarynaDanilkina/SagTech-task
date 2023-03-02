@@ -1,8 +1,11 @@
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/router";
+// import { useAuth } from "@/auth";
 import styles from "../styles/home.module.css";
 
 function Home() {
+  const router = useRouter();
+  // const { user } = useAuth();
   return (
     <div className={styles.homepage__container}>
       <Image
@@ -10,16 +13,24 @@ function Home() {
         className={styles.logo}
         src="/logo.png"
         alt="Landscape picture"
-        width={160}
-        height={160}
+        width={110}
+        height={110}
       />
       <h1 className={styles.title}>Calendar</h1>
       <div className={styles.button__container}>
-        <button type="button" className={styles.button}>
-          <Link href="/signIn">Войти</Link>
+        <button
+          type="button"
+          className={styles.button}
+          onClick={() => router.push("/signIn")}
+        >
+          Войти
         </button>
-        <button type="button" className={styles.button}>
-          <Link href="/register">Регистрация</Link>
+        <button
+          type="button"
+          className={styles.button}
+          onClick={() => router.push("/register")}
+        >
+          Регистрация
         </button>
       </div>
     </div>

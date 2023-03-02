@@ -12,4 +12,8 @@ body{
   display: flex;
   margin: 0px auto;
   justify-content: center;
+  background: #f8f9f9;
+}
+p,h1,h2,h3,a{
+  color: #494949;
 }

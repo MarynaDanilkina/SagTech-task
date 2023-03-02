@@ -2,9 +2,16 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import React, { useContext, createContext } from "react";
+import { useToast } from "@chakra-ui/core";
 import styles from "../styles/signin.module.css";
 
+const authContext = createContext();
+const useAuth = () => useContext(authContext);
+
 function SignIn() {
+  const auth = useAuth();
+  const toast = useToast();
   const router = useRouter();
   const {
     register,
@@ -14,10 +21,24 @@ function SignIn() {
   } = useForm({
     mode: "onChange",
   });
-  const onSubmit = (data) => {
+  const onSubmit = ({ email, password }) => {
     reset();
-    console.log(data);
-    router.push("/");
+    console.log(email);
+    console.log(password);
+    auth
+      .signin(email, pass)
+      .then(() => {
+        router.push("/deals");
+      })
+      .catch((error) => {
+        toast({
+          title: "An error occurred.",
+          description: error.message,
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      });
   };
 
   return (
@@ -86,6 +107,13 @@ function SignIn() {
           </button>
         </div>
       </form>
+      <button
+        type="button"
+        className={styles.button__register}
+        onClick={() => router.push("/register")}
+      >
+        Создать новый аккаунт
+      </button>
     </div>
   );
 }
