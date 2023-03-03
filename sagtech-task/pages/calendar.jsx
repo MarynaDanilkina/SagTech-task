@@ -6,22 +6,24 @@ import { FreeMode } from "swiper";
 import "swiper/css/free-mode";
 import { useEffect } from "react";
 import { collection, onSnapshot, query, where } from "@firebase/firestore";
+import { getAuth } from "firebase/auth";
 import { reduserSlice } from "@/toolkitRedux/calendarReducer";
 import DayItem from "@/components/dayItem";
 import styles from "../styles/calendar.module.css";
-import { db, auth } from "@/firebase";
-import TaskList from "@/components/TaskList";
+import { db } from "@/firebase";
 import store from "@/toolkitRedux";
+import TaskList from "@/components/TaskList";
 
 function Calendar() {
   const { dispatch } = store;
   const { setTask } = reduserSlice.actions;
+  const auth = getAuth();
+  const user = auth.currentUser;
   const today = moment();
   const endMonth = today.clone().endOf("month");
   const day = today.clone().startOf("day");
   moment.updateLocale("ru", { week: { dow: 1 } });
   const calendar = [];
-  const user = auth.currentUser;
   while (!day.isAfter(endMonth)) {
     calendar.push(day.clone());
     day.add(1, "day");
@@ -45,7 +47,9 @@ function Calendar() {
     }
   };
   useEffect(() => {
-    getAllTasks();
+    if (user) {
+      getAllTasks();
+    }
   }, []);
   return (
     <div className={styles.calendar__container}>
@@ -61,7 +65,7 @@ function Calendar() {
       >
         {calendar.map((dayItem) => (
           <SwiperSlide key={dayItem}>
-            <DayItem dayItem={dayItem} key={dayItem.format("DDMMYYYY")} />
+            <DayItem dayItem={dayItem} key={dayItem} />
           </SwiperSlide>
         ))}
       </Swiper>

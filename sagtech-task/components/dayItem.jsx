@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-// eslint-disable-next-line import/no-extraneous-dependencies
 import moment from "moment";
 import { useSelector } from "react-redux";
 import styles from "./dayItem.module.css";
@@ -12,25 +10,26 @@ function DayItem({ dayItem }) {
   const dayTasks = tasks.filter(
     (task) => task.data.date >= start && task.data.date <= end
   );
-  console.log(dayTasks);
   return (
-    <button
-      type="button"
-      className={
-        selectedDay ? styles.calendar__cellCurrent : styles.calendar__cell
-      }
-    >
-      <p
+    <div className={styles.dayItem__container}>
+      <button
+        type="button"
         className={
-          selectedDay ? `${styles.date__p} ${styles.orange}` : styles.date__p
+          selectedDay ? styles.calendar__cellCurrent : styles.calendar__cell
         }
       >
-        {dayItem.format("D")}
-      </p>
-      {dayTasks.map(() => (
-        <p>задача</p>
-      ))}
-    </button>
+        <p
+          className={
+            selectedDay ? `${styles.date__p} ${styles.orange}` : styles.date__p
+          }
+        >
+          {dayItem.format("D")}
+        </p>
+        {dayTasks.map(() => (
+          <p>задача</p>
+        ))}
+      </button>
+    </div>
   );
 }
 export default DayItem;

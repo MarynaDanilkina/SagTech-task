@@ -1,10 +1,25 @@
 import "../styles/globals.css";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { Provider } from "react-redux";
+import { useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
 import Layout from "../components/Layout";
 import store from "../toolkitRedux/index";
+import { auth } from "@/firebase";
 
 function MyApp({ Component, pageProps }) {
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      console.log(user);
+      if (user) {
+        setCurrentUser(user);
+      } else {
+        setCurrentUser(null);
+      }
+    });
+  }, []);
+  console.log(currentUser);
   return (
     <Provider store={store}>
       <Layout>

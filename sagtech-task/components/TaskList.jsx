@@ -1,16 +1,18 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { collection, addDoc } from "@firebase/firestore";
-import { db, auth } from "@/firebase";
+import { getAuth } from "firebase/auth";
+import { db } from "@/firebase";
 import styles from "./taskList.module.css";
 
 function TaskList() {
+  const auth = getAuth();
   const user = auth.currentUser;
   const AddTask = async () => {
     try {
       await addDoc(collection(db, "task"), {
-        date: "1678004247",
+        date: "1677948973",
         done: true,
-        title: "Удобвадлывьалдыьвмывмы",
+        title: "122",
         userID: user.uid,
       });
     } catch (error) {

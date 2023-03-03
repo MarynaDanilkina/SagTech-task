@@ -18,9 +18,7 @@ function SignIn() {
   });
   const onSubmit = (data) => {
     signInWithEmailAndPassword(auth, data.email, data.password)
-      .then((userCredential) => {
-        const { user } = userCredential;
-        console.log(user);
+      .then(() => {
         reset();
         router.push("/calendar");
       })

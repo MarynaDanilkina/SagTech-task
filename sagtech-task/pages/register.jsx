@@ -2,16 +2,10 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import Link from "next/link";
-// import { useSelector } from "react-redux";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import styles from "../styles/signin.module.css";
-// import { reduserSlice } from "@/toolkitRedux/toolkitReducer";
-// import store from "@/toolkitRedux";
 
 function Register() {
-  // const { error, user } = useSelector((state) => state.user);
-  // const { dispatch } = store;
-  // const { setError } = reduserSlice.actions;
   const auth = getAuth();
   const router = useRouter();
   const {
