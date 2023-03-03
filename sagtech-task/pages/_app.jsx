@@ -1,18 +1,18 @@
 import "../styles/globals.css";
-import Layout from "../components/Layout";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Provider } from "react-redux";
-import store from '../toolkitRedux/index';
+import Layout from "../components/Layout";
+import store from "../toolkitRedux/index";
 
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
-        <Layout>
-          <main>
-            <Component {...pageProps} />
-          </main>
-        </Layout>
+      <Layout>
+        <main>
+          <Component {...pageProps} />
+        </main>
+      </Layout>
     </Provider>
-    
   );
 }
 

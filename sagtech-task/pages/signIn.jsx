@@ -2,14 +2,9 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import React, { useContext, createContext } from "react";
-import { useToast } from "@chakra-ui/core";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import styles from "../styles/signin.module.css";
-
-const authContext = createContext();
-const useAuth = () => useContext(authContext);
 
 function SignIn() {
   const router = useRouter();
@@ -24,13 +19,13 @@ function SignIn() {
   const onSubmit = (data) => {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
-        const user = userCredential.user;
+        const { user } = userCredential;
+        console.log(user);
         reset();
         router.push("/calendar");
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        console.log(error);
       });
   };
 

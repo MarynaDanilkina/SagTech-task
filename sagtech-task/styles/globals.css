@@ -13,10 +13,18 @@ body{
   margin: 0px auto;
   justify-content: center;
   background: #f8f9f9;
+  height: 100vh;
+}
+li {
+  list-style-type: none;
 }
 p,h1,h2,h3,a{
   color: #494949;
 }
 .swiper-slide{
   width: 50px !important;
+}
+.swiper-horizontal {
+  max-width: 762px;
+  width: 80vw;
 }
