@@ -7,6 +7,7 @@ import "swiper/css/free-mode";
 import { useEffect } from "react";
 import { collection, onSnapshot, query, where } from "@firebase/firestore";
 import { getAuth } from "firebase/auth";
+import { useSelector } from "react-redux";
 import { reduserSlice } from "@/toolkitRedux/calendarReducer";
 import DayItem from "@/components/dayItem";
 import styles from "../styles/calendar.module.css";
@@ -16,7 +17,8 @@ import TaskList from "@/components/TaskList";
 
 function Calendar() {
   const { dispatch } = store;
-  const { setTask } = reduserSlice.actions;
+  const { setTask, getDelectedDay } = reduserSlice.actions;
+  const { tasks } = useSelector((state) => state.calendar);
   const auth = getAuth();
   const user = auth.currentUser;
   const today = moment();
@@ -50,7 +52,12 @@ function Calendar() {
     if (user) {
       getAllTasks();
     }
-  }, []);
+  }, [user]);
+  useEffect(() => {
+    if (tasks.length !== 0) {
+      dispatch(getDelectedDay({ today: today.clone().format("X"), tasks }));
+    }
+  }, [tasks]);
   return (
     <div className={styles.calendar__container}>
       <Swiper
@@ -65,7 +72,7 @@ function Calendar() {
       >
         {calendar.map((dayItem) => (
           <SwiperSlide key={dayItem}>
-            <DayItem dayItem={dayItem} key={dayItem} />
+            <DayItem dayItem={dayItem} key={dayItem.format("DDMMYYYY")} />
           </SwiperSlide>
         ))}
       </Swiper>

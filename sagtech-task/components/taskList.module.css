@@ -5,6 +5,9 @@
   justify-content: center;
   flex-direction: column;
 }
+.tasks__container{
+  margin-top: 30px;
+}
 .button__addTask{
   border: none;
   cursor: pointer;

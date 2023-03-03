@@ -11,7 +11,6 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      console.log(user);
       if (user) {
         setCurrentUser(user);
       } else {
@@ -19,7 +18,6 @@ function MyApp({ Component, pageProps }) {
       }
     });
   }, []);
-  console.log(currentUser);
   return (
     <Provider store={store}>
       <Layout>
