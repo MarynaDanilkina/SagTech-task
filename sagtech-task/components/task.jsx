@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { collection, addDoc } from "@firebase/firestore";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import { auth, db } from "@/firebase";
 import styles from "../styles/signin.module.css";
 import stylesTask from "./task.module.css";
@@ -30,7 +30,7 @@ function Task({ close }) {
       reset();
       router.back();
     } catch (error) {
-      console.log(error);
+      toast.error(error.message);
     }
   };
   const onSubmit = (data) => {

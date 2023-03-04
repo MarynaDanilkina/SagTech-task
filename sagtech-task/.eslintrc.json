@@ -30,6 +30,7 @@
         "no-undef": "off",
         "import/no-unresolved": "off",
         "import/extensions": "off",
-        "jsx-a11y/anchor-is-valid": "off"
+        "jsx-a11y/anchor-is-valid": "off",
+        "import/no-extraneous-dependencies": "off"
     }
 }

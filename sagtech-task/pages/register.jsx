@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { toast } from "react-toastify";
 import styles from "../styles/signin.module.css";
 
 function Register() {
@@ -23,7 +24,7 @@ function Register() {
         router.push("/calendar");
       })
       .catch((error) => {
-        console.log(error);
+        toast.error(error.message);
       });
   };
 

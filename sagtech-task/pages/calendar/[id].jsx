@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 import { db } from "@/firebase";
 import styles from "../../styles/id.module.css";
 
@@ -39,7 +40,7 @@ function Id() {
       const docSnap = await getDoc(docRef);
       setTask(docSnap.data());
     } catch (error) {
-      console.log(error);
+      toast.error(error.message);
     }
   };
   const upDateTask = async (data) => {
@@ -51,7 +52,7 @@ function Id() {
       setEdit(false);
       getTask();
     } catch (error) {
-      console.log(error);
+      toast.error(error.message);
     }
   };
   useEffect(() => {

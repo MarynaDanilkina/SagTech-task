@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { collection, onSnapshot, query, where } from "@firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 import { reduserSlice } from "@/toolkitRedux/calendarReducer";
 import DayItem from "@/components/dayItem";
 import styles from "../styles/calendar.module.css";
@@ -46,7 +47,7 @@ function Calendar() {
         );
       });
     } catch (error) {
-      console.log(error);
+      toast.error(error.message);
     }
   };
   useEffect(() => {

@@ -1,5 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { doc, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 import { db } from "@/firebase";
 import styles from "./labelTask.module.css";
 
@@ -12,7 +14,7 @@ function LabelTask({ task }) {
         done: checked,
       });
     } catch (error) {
-      console.log(error);
+      toast.error(error.message);
     }
   };
   const handleChange = () => {
