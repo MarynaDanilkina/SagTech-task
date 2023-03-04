@@ -28,8 +28,6 @@ function Calendar() {
       router.push("/");
     }
   }, []);
-
-  console.log(user);
   const today = moment();
   const endMonth = today.clone().endOf("month");
   const day = today.clone().startOf("day");

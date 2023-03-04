@@ -24,7 +24,7 @@ function Task() {
       await addDoc(collection(db, "task"), {
         ...data,
         date: selectedDay,
-        done: true,
+        done: false,
         userID: user.uid,
       });
       reset();

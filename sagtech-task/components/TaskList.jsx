@@ -17,7 +17,7 @@ function TaskList() {
         {dayTaskSelected.length}
       </h2>
       <div className={styles.tasks__container}>
-        <ul>
+        <ul className={styles.ul}>
           {dayTaskSelected.map((task) => (
             <li key={task.id}>
               <LabelTask task={task} />
