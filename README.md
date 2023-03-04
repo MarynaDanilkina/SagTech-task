@@ -16,7 +16,7 @@
 Запустить преложение: npm run dev
 
 
-3)Application stack:
+3) Application stack:
 
 
 @reduxjs/toolkit - Для написания логики Redux
