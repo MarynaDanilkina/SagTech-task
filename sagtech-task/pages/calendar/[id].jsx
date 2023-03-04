@@ -1,13 +1,5 @@
 import { useForm } from "react-hook-form";
-import {
-  collection,
-  doc,
-  documentId,
-  onSnapshot,
-  query,
-  updateDoc,
-  where,
-} from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { db } from "@/firebase";
@@ -22,6 +14,7 @@ function Id() {
   const { register, handleSubmit } = useForm({
     mode: "onChange",
   });
+  const { id } = router.query;
   function ChangeDescription(event) {
     setDescription(event.target.value);
   }
@@ -30,17 +23,25 @@ function Id() {
   }
 
   function cancellation() {
-    setDescription(task[0].data.description);
-    setTitle(task[0].data.title);
+    setDescription(task.description);
+    setTitle(task.title);
     setEdit(false);
   }
   useEffect(() => {
     if (task) {
-      setDescription(task[0].data.description);
-      setTitle(task[0].data.title);
+      setDescription(task.description);
+      setTitle(task.title);
     }
   }, [task]);
-  const { id } = router.query;
+  const getTask = async () => {
+    try {
+      const docRef = doc(db, "task", id);
+      const docSnap = await getDoc(docRef);
+      setTask(docSnap.data());
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const upDateTask = async (data) => {
     try {
       const docRef = doc(db, "task", id);
@@ -48,23 +49,7 @@ function Id() {
         ...data,
       });
       setEdit(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const getTask = async () => {
-    try {
-      const collectionRef = collection(db, "task");
-      const qry = query(collectionRef, where(documentId(), "==", id));
-
-      await onSnapshot(qry, (querySnapshot) => {
-        setTask(
-          querySnapshot.docs.map((doc2) => ({
-            id: doc2.id,
-            data: doc2.data(),
-          }))
-        );
-      });
+      getTask();
     } catch (error) {
       console.log(error);
     }
@@ -86,8 +71,8 @@ function Id() {
           >
             назад
           </button>
-          <p>{task[0].data.title}</p>
-          <p>{task[0].data.description}</p>
+          <p>{task.title}</p>
+          <p>{task.description}</p>
           <button
             className={styles.submit}
             type="button"

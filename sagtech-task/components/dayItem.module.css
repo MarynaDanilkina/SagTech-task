@@ -8,6 +8,7 @@
   align-items: center;
   flex-direction: column;
   justify-content: space-around;
+  cursor: pointer;
 }
 .date__p{
   font-family: 'SF UI Display';
@@ -42,6 +43,7 @@
   align-items: center;
   flex-direction: column;
   justify-content: space-around;
+  cursor: pointer;
 }
 .status__container{
   display: flex;
