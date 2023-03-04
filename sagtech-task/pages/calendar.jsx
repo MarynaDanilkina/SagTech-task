@@ -7,7 +7,6 @@ import "swiper/css/free-mode";
 import { useEffect } from "react";
 import { collection, onSnapshot, query, where } from "@firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { reduserSlice } from "@/toolkitRedux/calendarReducer";
 import DayItem from "@/components/dayItem";
@@ -20,13 +19,12 @@ function Calendar() {
   const router = useRouter();
   const { dispatch } = store;
   const { setTask } = reduserSlice.actions;
-  const { tasks } = useSelector((state) => state.calendar);
   const auth = getAuth();
   const user = auth.currentUser;
   const today = moment();
   const endMonth = today.clone().endOf("month");
   const day = today.clone().startOf("day");
-  moment.updateLocale("ru", { week: { dow: 1 } });
+  moment.updateLocale("en", { week: { dow: 1 } });
   const calendar = [];
   while (!day.isAfter(endMonth)) {
     calendar.push(day.clone());
@@ -61,19 +59,11 @@ function Calendar() {
       getAllTasks();
     }
   }, [user]);
-  useEffect(() => {
-    if (tasks.length !== 0) {
-      // dispatch(getSelectedDay({ today: today.clone().format("X"), tasks }));
-    }
-  }, [tasks, user]);
   return (
     <div className={styles.calendar__container}>
       <Swiper
         slidesPerView="auto"
         spaceBetween={10}
-        pagination={{
-          clickable: true,
-        }}
         freeMode
         modules={[FreeMode]}
         className="mySwiper"

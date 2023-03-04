@@ -49,6 +49,15 @@ function DayItem({ dayItem }) {
         <p
           className={
             selectedDaySame
+              ? `${styles.date__pWeek} ${styles.orange}`
+              : styles.date__pWeek
+          }
+        >
+          {dayItem.format("ddd")}
+        </p>
+        <p
+          className={
+            selectedDaySame
               ? `${styles.date__p} ${styles.orange}`
               : styles.date__p
           }

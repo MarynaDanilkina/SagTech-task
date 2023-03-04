@@ -8,6 +8,7 @@ export const initialState = {
   tasks: [],
   selectedDay: moment().clone().format("X"),
   dayTaskSelected: [],
+  selectedTask: {},
 };
 
 export const reduserSlice = createSlice({
@@ -48,6 +49,12 @@ export const reduserSlice = createSlice({
           task.data.date >= startSelectedDay && task.data.date <= endSelectedDay
       );
       state.dayTaskSelected = dayTaskSelected;
+    },
+    getSelectedTask: (state, action) => {
+      const newTask = state.tasks.filter(
+        (event) => event.id === action.payload
+      );
+      state.selectedTask = newTask;
     },
   },
 });

@@ -4,20 +4,30 @@
   border: 1px solid #2D2D2E;
   border-radius: 10px;
   position: relative;
-  cursor: pointer;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
 }
 .date__p{
   font-family: 'SF UI Display';
   font-style: normal;
   font-weight: 300;
-  font-size: 10px;
+  font-size: 13px;
   line-height: 120%;
   display: flex;
   align-items: center;
   color: #2D2D2E;
-  position: absolute;
-  left: 20px;
-  bottom: 4px;
+}
+.date__pWeek{
+  font-family: 'SF UI Display';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  color: #2D2D2E;
 }
 .orange{
   color: #ff642c;
@@ -28,6 +38,10 @@
   border: 1px solid #ff642c;
   border-radius: 10px;
   position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
 }
 .status__container{
   display: flex;

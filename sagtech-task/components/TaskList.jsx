@@ -1,11 +1,15 @@
 import { useSelector } from "react-redux";
 import moment from "moment";
-import { useRouter } from "next/router";
+import { useCallback, useState } from "react";
 import styles from "./taskList.module.css";
 import LabelTask from "./labelTask";
+import Task from "./task";
 
 function TaskList() {
-  const router = useRouter();
+  const [selectedTask, setSelectedTask] = useState(false);
+  const close = useCallback((value) => {
+    setSelectedTask(value);
+  }, []);
   const { dayTaskSelected, selectedDay } = useSelector(
     (state) => state.calendar
   );
@@ -28,10 +32,11 @@ function TaskList() {
       <button
         type="button"
         className={styles.button__addTask}
-        onClick={() => router.push("/task")}
+        onClick={() => setSelectedTask(true)}
       >
         Добавить новую задачу
       </button>
+      {selectedTask && <Task close={close} />}
     </div>
   );
 }

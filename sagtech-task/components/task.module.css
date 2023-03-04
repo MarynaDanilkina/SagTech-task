@@ -1,0 +1,95 @@
+.form__textarea{
+  margin-top: 20px;
+  position: relative;
+  width: 295px;
+  height: 193px;
+  background-color: transparent;
+  border: 1px solid #BDBDBD;
+  border-radius: 20px;
+  outline:none;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+  caret-color: #2D2D2E;
+  padding: 10px;
+}
+.button__close{
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+}
+.task__container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  z-index: 1000;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.7);
+  top: 0px;
+}
+.modal{
+  background-color: #fff;
+  width: 80vw;
+  height: 80vh;
+  border-radius: 20px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+.buttonClose__container{
+  display: flex;
+  justify-content: flex-end;
+}
+.form__container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 10px;
+  gap: 15px;
+}
+.form__list{
+  display: flex;
+  justify-content: center;
+}
+.label__span{
+  position: absolute;
+  left: 0px;
+}
+.label__description{
+  position: relative;
+}
+.form__button{
+  display: flex;
+  justify-content: center;
+}
+
+.submit {
+  margin-top: 10px;
+  cursor: pointer;
+  margin-bottom: 24px;
+  width: 295px;
+  height: 39px;
+  background: #ff642c;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 110%;
+  color: #ffc19c;
+  padding: 0;
+}
+.submit:disabled {
+  cursor: default;
+  background: #d7c2c2;
+  color: #6e6e6e;
+}
