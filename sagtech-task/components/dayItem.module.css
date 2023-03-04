@@ -29,3 +29,21 @@
   border-radius: 10px;
   position: relative;
 }
+.status__container{
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 1px;
+}
+.status__done{
+  width: 5px;
+  height: 5px;
+  border-radius: 5px;
+  background-color: #f0be90;
+}
+.status__notDone{
+  width: 5px;
+  height: 5px;
+  border-radius: 5px;
+  background-color: #a3a3a3;
+}

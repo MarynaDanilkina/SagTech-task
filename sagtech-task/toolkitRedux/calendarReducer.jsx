@@ -6,7 +6,7 @@ import moment from "moment";
 export const initialState = {
   calendar: [],
   tasks: [],
-  selectedDay: null,
+  selectedDay: moment().clone().format("X"),
   dayTaskSelected: [],
 };
 
@@ -19,25 +19,35 @@ export const reduserSlice = createSlice({
     },
     setTask: (state, action) => {
       state.tasks = action.payload;
-    },
-    getSelectedDay: (state, action) => {
-      state.selectedDay = action.payload.today;
       const startSelectedDay = moment
-        .unix(action.payload.today)
+        .unix(state.selectedDay)
         .startOf("day")
         .format("X");
       const endSelectedDay = moment
-        .unix(action.payload.today)
+        .unix(state.selectedDay)
         .endOf("day")
         .format("X");
-      const dayTaskSelected = action.payload.tasks.filter(
+      const dayTaskSelected = state.tasks.filter(
         (task) =>
           task.data.date >= startSelectedDay && task.data.date <= endSelectedDay
       );
       state.dayTaskSelected = dayTaskSelected;
     },
-    getDayTaskSelected: (state, action) => {
-      state.dayTaskSelected = action.payload;
+    getSelectedDay: (state, action) => {
+      state.selectedDay = action.payload;
+      const startSelectedDay = moment
+        .unix(state.selectedDay)
+        .startOf("day")
+        .format("X");
+      const endSelectedDay = moment
+        .unix(state.selectedDay)
+        .endOf("day")
+        .format("X");
+      const dayTaskSelected = state.tasks.filter(
+        (task) =>
+          task.data.date >= startSelectedDay && task.data.date <= endSelectedDay
+      );
+      state.dayTaskSelected = dayTaskSelected;
     },
   },
 });

@@ -19,15 +19,10 @@ import TaskList from "@/components/TaskList";
 function Calendar() {
   const router = useRouter();
   const { dispatch } = store;
-  const { setTask, getSelectedDay } = reduserSlice.actions;
+  const { setTask } = reduserSlice.actions;
   const { tasks } = useSelector((state) => state.calendar);
   const auth = getAuth();
   const user = auth.currentUser;
-  useEffect(() => {
-    if (!user) {
-      router.push("/");
-    }
-  }, []);
   const today = moment();
   const endMonth = today.clone().endOf("month");
   const day = today.clone().startOf("day");
@@ -37,6 +32,7 @@ function Calendar() {
     calendar.push(day.clone());
     day.add(1, "day");
   }
+
   const getAllTasks = async () => {
     try {
       const collectionRef = collection(db, "task");
@@ -56,13 +52,18 @@ function Calendar() {
     }
   };
   useEffect(() => {
+    if (!user) {
+      router.push("/");
+    }
+  }, []);
+  useEffect(() => {
     if (user) {
       getAllTasks();
     }
   }, [user]);
   useEffect(() => {
     if (tasks.length !== 0) {
-      dispatch(getSelectedDay({ today: today.clone().format("X"), tasks }));
+      // dispatch(getSelectedDay({ today: today.clone().format("X"), tasks }));
     }
   }, [tasks, user]);
   return (

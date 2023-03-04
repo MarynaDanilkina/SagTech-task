@@ -1,9 +1,8 @@
-// import { useState } from "react";
+import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import styles from "./labelTask.module.css";
 
 function LabelTask({ task }) {
-  // const [checked, setChecked] = useState(task.data.done);
   const UpdatesetChecked = async (checked) => {
     try {
       const docRef = doc(db, "task", task.id);
