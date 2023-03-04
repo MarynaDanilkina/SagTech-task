@@ -20,7 +20,7 @@ export const reduserSlice = createSlice({
     setTask: (state, action) => {
       state.tasks = action.payload;
     },
-    getDelectedDay: (state, action) => {
+    getSelectedDay: (state, action) => {
       state.selectedDay = action.payload.today;
       const startSelectedDay = moment
         .unix(action.payload.today)

@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
 import styles from "../styles/signin.module.css";
+import { auth } from "@/firebase";
 
 function SignIn() {
   const router = useRouter();

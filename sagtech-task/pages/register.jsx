@@ -6,8 +6,8 @@ import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import styles from "../styles/signin.module.css";
 
 function Register() {
-  const auth = getAuth();
   const router = useRouter();
+  const auth = getAuth();
   const {
     register,
     handleSubmit,

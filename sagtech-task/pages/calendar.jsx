@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { collection, onSnapshot, query, where } from "@firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 import { reduserSlice } from "@/toolkitRedux/calendarReducer";
 import DayItem from "@/components/dayItem";
 import styles from "../styles/calendar.module.css";
@@ -16,11 +17,19 @@ import store from "@/toolkitRedux";
 import TaskList from "@/components/TaskList";
 
 function Calendar() {
+  const router = useRouter();
   const { dispatch } = store;
-  const { setTask, getDelectedDay } = reduserSlice.actions;
+  const { setTask, getSelectedDay } = reduserSlice.actions;
   const { tasks } = useSelector((state) => state.calendar);
   const auth = getAuth();
   const user = auth.currentUser;
+  useEffect(() => {
+    if (!user) {
+      router.push("/");
+    }
+  }, []);
+
+  console.log(user);
   const today = moment();
   const endMonth = today.clone().endOf("month");
   const day = today.clone().startOf("day");
@@ -55,9 +64,9 @@ function Calendar() {
   }, [user]);
   useEffect(() => {
     if (tasks.length !== 0) {
-      dispatch(getDelectedDay({ today: today.clone().format("X"), tasks }));
+      dispatch(getSelectedDay({ today: today.clone().format("X"), tasks }));
     }
-  }, [tasks]);
+  }, [tasks, user]);
   return (
     <div className={styles.calendar__container}>
       <Swiper
