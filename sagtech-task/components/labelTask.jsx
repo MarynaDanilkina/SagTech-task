@@ -2,7 +2,7 @@
 import { doc, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
-import { db } from "@/firebase";
+import { db } from "@/config/firebase";
 import styles from "./labelTask.module.css";
 
 function LabelTask({ task }) {

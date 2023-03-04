@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import { reduserSlice } from "@/toolkitRedux/calendarReducer";
 import DayItem from "@/components/dayItem";
 import styles from "../styles/calendar.module.css";
-import { db } from "@/firebase";
+import { db } from "@/config/firebase";
 import store from "@/toolkitRedux";
 import TaskList from "@/components/TaskList";
 

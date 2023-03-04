@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import Layout from "../components/Layout";
 import store from "../toolkitRedux/index";
-import { auth } from "@/firebase";
+import { auth } from "@/config/firebase";
 
 function MyApp({ Component, pageProps }) {
   const [currentUser, setCurrentUser] = useState(null);

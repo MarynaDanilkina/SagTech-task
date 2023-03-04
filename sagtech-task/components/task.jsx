@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { collection, addDoc } from "@firebase/firestore";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { auth, db } from "@/firebase";
+import { auth, db } from "@/config/firebase";
 import styles from "../styles/signin.module.css";
 import stylesTask from "./task.module.css";
 

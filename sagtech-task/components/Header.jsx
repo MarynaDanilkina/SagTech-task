@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { signOut } from "firebase/auth";
 import { useRouter } from "next/router";
-import { auth } from "../firebase";
+import { auth } from "../config/firebase";
 import styles from "./header.module.css";
 
 function Header() {

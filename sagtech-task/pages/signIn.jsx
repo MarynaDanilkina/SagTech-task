@@ -5,7 +5,7 @@ import Link from "next/link";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { toast } from "react-toastify";
 import styles from "../styles/signin.module.css";
-import { auth } from "@/firebase";
+import { auth } from "@/config/firebase";
 
 function SignIn() {
   const router = useRouter();

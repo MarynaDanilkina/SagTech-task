@@ -3,7 +3,7 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { db } from "@/firebase";
+import { db } from "@/config/firebase";
 import styles from "../../styles/id.module.css";
 
 function Id() {
