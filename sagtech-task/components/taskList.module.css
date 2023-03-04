@@ -1,0 +1,35 @@
+.taskList__container{
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.tasks__container{
+  margin-top: 30px;
+}
+.button__addTask{
+  border: none;
+  cursor: pointer;
+  margin-top: 60px;
+  margin-bottom: 24px;
+  width: 295px;
+  height: 39px;
+  background: #ff642c;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 110%;
+  color: #ffc19c;
+  padding: 0;
+}
+.ul{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}

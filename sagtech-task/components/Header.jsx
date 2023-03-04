@@ -1,19 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useSelector } from 'react-redux';
-import { getAuth, signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
+import { useRouter } from "next/router";
 import { auth } from "../firebase";
 import styles from "./header.module.css";
-import { useRouter } from "next/router";
 
 function Header() {
-  const { user } = useSelector((state) => state.user);
-  console.log('user', user)
   const router = useRouter();
   function logout() {
     signOut(auth).then(() => {
-      router.push("/")
-    })
+      router.push("/");
+    });
   }
   return (
     <header className={styles.header__container}>
@@ -28,17 +25,15 @@ function Header() {
             />
           </Link>
         </div>
-        {user ? (
-            <div className={styles.links}>
-              <button className={styles.button__logout} onClick={logout}>Выйти</button>
-            </div> 
-        ): (
-          <div className={styles.links}>
-            <Link href="/signIn">Войти</Link>
-            <Link href="/register">Регистрация</Link>
-          </div> 
-        )}
-        
+        <div className={styles.links}>
+          <button
+            type="button"
+            className={styles.button__logout}
+            onClick={logout}
+          >
+            Выйти
+          </button>
+        </div>
       </nav>
     </header>
   );

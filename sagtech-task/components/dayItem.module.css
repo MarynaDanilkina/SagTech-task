@@ -1,0 +1,65 @@
+.calendar__cell{
+  width: 50px;
+  height: 50px;
+  border: 1px solid #2D2D2E;
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  cursor: pointer;
+}
+.date__p{
+  font-family: 'SF UI Display';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  color: #2D2D2E;
+}
+.date__pWeek{
+  font-family: 'SF UI Display';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  color: #2D2D2E;
+}
+.orange{
+  color: #ff642c;
+}
+.calendar__cellCurrent{
+  width: 50px;
+  height: 50px;
+  border: 1px solid #ff642c;
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  cursor: pointer;
+}
+.status__container{
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 1px;
+}
+.status__done{
+  width: 5px;
+  height: 5px;
+  border-radius: 5px;
+  background-color: #f0be90;
+}
+.status__notDone{
+  width: 5px;
+  height: 5px;
+  border-radius: 5px;
+  background-color: #a3a3a3;
+}

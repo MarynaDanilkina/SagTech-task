@@ -2,19 +2,12 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import React, { createContext, useState } from "react";
-import { useSelector } from 'react-redux'
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import styles from "../styles/signin.module.css";
-import { reduserSlice } from "@/toolkitRedux/toolkitReducer";
-import store from "@/toolkitRedux";
 
 function Register() {
-  const { error, user } = useSelector((state) => state.user);
-  const dispatch = store.dispatch;
-  const { setError } = reduserSlice.actions;
-  const auth = getAuth();
   const router = useRouter();
+  const auth = getAuth();
   const {
     register,
     handleSubmit,
@@ -28,8 +21,9 @@ function Register() {
       .then(() => {
         reset();
         router.push("/calendar");
-      }).catch((error) => {
-        console.log(error)
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 
@@ -75,7 +69,7 @@ function Register() {
               placeholder=" "
               type="password"
               {...register("password", {
-                minLength: { value: 6, message: 'Введите минимум 6 символов' }
+                minLength: { value: 6, message: "Введите минимум 6 символов" },
               })}
             />
             <span className={styles.label__span}>Пароль:</span>
