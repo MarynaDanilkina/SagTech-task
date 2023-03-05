@@ -1,10 +1,9 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import moment from "moment";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { FreeMode } from "swiper";
 import "swiper/css/free-mode";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { collection, onSnapshot, query, where } from "@firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { useRouter } from "next/router";
@@ -22,16 +21,33 @@ function Calendar() {
   const { setTask } = reduserSlice.actions;
   const auth = getAuth();
   const user = auth.currentUser;
-  const today = moment();
-  const endMonth = today.clone().endOf("month");
-  const day = today.clone().startOf("day");
+  const [calendar, setCalendar] = useState([]);
   moment.updateLocale("en", { week: { dow: 1 } });
-  const calendar = [];
-  while (!day.isAfter(endMonth)) {
-    calendar.push(day.clone());
-    day.add(1, "day");
-  }
 
+  const today = moment();
+  const startDay = today.clone();
+  const endMonth = today.clone().endOf("month");
+  const numberDaysMonthNow = endMonth.diff(startDay, "days");
+  const dayPrev = startDay.clone().subtract(1, "day");
+  const array = [...Array(numberDaysMonthNow + 1)].map(() =>
+    dayPrev.add(1, "day").clone()
+  );
+  useEffect(() => {
+    setCalendar(array);
+  }, []);
+  function endSlide() {
+    if (calendar.length !== 0) {
+      const startNewMonth = calendar.pop().clone().add(1, "day");
+      const endNewMonth = startNewMonth.clone().add(1, "month");
+      const numberDaysMonth = endNewMonth.diff(startNewMonth, "days");
+      const dayPrevNew = startNewMonth.clone().subtract(2, "day");
+      const newArrayMonth = [...Array(numberDaysMonth + 1)].map(() =>
+        dayPrevNew.add(1, "day").clone()
+      );
+      const newCalendar = calendar.concat(newArrayMonth);
+      setCalendar(newCalendar);
+    }
+  }
   const getAllTasks = async () => {
     try {
       const collectionRef = collection(db, "task");
@@ -68,6 +84,7 @@ function Calendar() {
         freeMode
         modules={[FreeMode]}
         className="mySwiper"
+        onReachEnd={() => endSlide()}
       >
         {calendar.map((dayItem) => (
           <SwiperSlide key={dayItem}>

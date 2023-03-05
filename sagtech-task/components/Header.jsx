@@ -17,7 +17,6 @@ function Header() {
       router.push("/");
     });
   }
-  console.log(colorTheme);
   return (
     <header className={styles.header__container}>
       <nav className={styles.nav}>
@@ -34,7 +33,7 @@ function Header() {
         <div className={styles.links}>
           <button
             type="button"
-            className={styles.button__theme}
+            className={`${styles.button__theme} ${colorTheme}`}
             onClick={onChangeTheme}
           >
             <svg

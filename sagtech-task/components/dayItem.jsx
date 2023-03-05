@@ -62,7 +62,7 @@ function DayItem({ dayItem }) {
               : styles.date__p
           }
         >
-          {dayItem.format("D")}
+          {dayItem.format("D")}.{dayItem.format("MM")}
         </p>
       </button>
       <div className={styles.status__container}>
