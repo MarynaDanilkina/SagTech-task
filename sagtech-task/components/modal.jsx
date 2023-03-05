@@ -1,16 +1,17 @@
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/router";
-import { collection, addDoc } from "@firebase/firestore";
+import { collection, addDoc, doc, updateDoc } from "@firebase/firestore";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
 import { auth, db } from "@/config/firebase";
 import styles from "../styles/signin.module.css";
-import stylesTask from "./task.module.css";
+import stylesTask from "./modal.module.css";
 
-function Task({ close }) {
-  const router = useRouter();
+function Task({ close, type, id, task, upDate }) {
   const user = auth.currentUser;
   const { selectedDay } = useSelector((state) => state.calendar);
+  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState("");
   const {
     register,
     handleSubmit,
@@ -19,6 +20,12 @@ function Task({ close }) {
   } = useForm({
     mode: "onChange",
   });
+  function ChangeDescription(event) {
+    setDescription(event.target.value);
+  }
+  function ChangeTitle(event) {
+    setTitle(event.target.value);
+  }
   const AddTask = async (data) => {
     try {
       await addDoc(collection(db, "task"), {
@@ -28,15 +35,37 @@ function Task({ close }) {
         userID: user.uid,
       });
       reset();
-      router.back();
+      close(false);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+  const upDateTask = async (data) => {
+    try {
+      const docRef = doc(db, "task", id);
+      await updateDoc(docRef, {
+        ...data,
+      });
+      close(false);
+      upDate();
     } catch (error) {
       toast.error(error.message);
     }
   };
   const onSubmit = (data) => {
-    AddTask(data);
+    if (type === "save") {
+      AddTask(data);
+    }
+    if (type === "update") {
+      upDateTask(data);
+    }
   };
-
+  useEffect(() => {
+    if (task) {
+      setDescription(task.description);
+      setTitle(task.title);
+    }
+  }, []);
   return (
     <div className={stylesTask.task__container}>
       <div className={stylesTask.modal}>
@@ -73,9 +102,11 @@ function Task({ close }) {
                 id="Title"
                 className={styles.label__info}
                 type="text"
-                placeholder=" "
+                placeholder={title || ""}
+                value={title || ""}
+                onInput={(event) => ChangeTitle(event)}
                 {...register("title", {
-                  required: "Поле обязательное для заполнения",
+                  required: true,
                 })}
               />
               <span className={styles.label__span}>Заголовок:</span>
@@ -87,11 +118,13 @@ function Task({ close }) {
               htmlFor="description"
             >
               <textarea
+                placeholder={description || ""}
+                value={description || ""}
+                onInput={(event) => ChangeDescription(event)}
                 id="description"
-                maxLength="1000"
                 className={stylesTask.form__textarea}
                 {...register("description", {
-                  required: "Поле обязательное для заполнения",
+                  required: true,
                 })}
               />
               <span className={stylesTask.label__span}>Описание:</span>
@@ -103,7 +136,7 @@ function Task({ close }) {
               type="submit"
               disabled={Object.keys(errors).length !== 0 || !isDirty}
             >
-              Сохранить
+              {type === "save" ? "Сохранить" : "Обновить"}
             </button>
           </div>
         </form>

@@ -1,0 +1,62 @@
+.button_goBack{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.id__container{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 20px;
+  gap: 20px;
+}
+.button__container{
+  display: flex;
+}
+.p__title{
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 110%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+.p__description{
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 110%;
+  display: flex;
+  text-align: center;
+  color: #8f8080;
+  min-height: 30vh;
+}
+.button__submitContainer{
+  display: flex;
+  justify-content: center;
+}
+.submit {
+  margin-top: 10px;
+  cursor: pointer;
+  margin-bottom: 24px;
+  width: 295px;
+  height: 39px;
+  background: #ff642c;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 110%;
+  color: #ffc19c;
+  padding: 0;
+}
+.submit:disabled {
+  cursor: default;
+  background: #d7c2c2;
+  color: #6e6e6e;
+}

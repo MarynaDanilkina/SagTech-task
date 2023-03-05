@@ -1,10 +1,10 @@
-import { useForm } from "react-hook-form";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { toast } from "react-toastify";
 import { db } from "@/config/firebase";
 import styles from "../../styles/id.module.css";
+import Task from "@/components/modal";
 
 function Id() {
   const router = useRouter();
@@ -12,28 +12,10 @@ function Id() {
   const [edit, setEdit] = useState(false);
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
-  const { register, handleSubmit } = useForm({
-    mode: "onChange",
-  });
+  const close = useCallback((value) => {
+    setEdit(value);
+  }, []);
   const { id } = router.query;
-  function ChangeDescription(event) {
-    setDescription(event.target.value);
-  }
-  function ChangeTitle(event) {
-    setTitle(event.target.value);
-  }
-
-  function cancellation() {
-    setDescription(task.description);
-    setTitle(task.title);
-    setEdit(false);
-  }
-  useEffect(() => {
-    if (task) {
-      setDescription(task.description);
-      setTitle(task.title);
-    }
-  }, [task]);
   const getTask = async () => {
     try {
       const docRef = doc(db, "task", id);
@@ -43,84 +25,61 @@ function Id() {
       toast.error(error.message);
     }
   };
-  const upDateTask = async (data) => {
-    try {
-      const docRef = doc(db, "task", id);
-      await updateDoc(docRef, {
-        ...data,
-      });
-      setEdit(false);
-      getTask();
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
   useEffect(() => {
     getTask();
   }, []);
-  const onSubmit = (data) => {
-    upDateTask(data);
-  };
+  useEffect(() => {
+    if (task) {
+      setDescription(task.description);
+      setTitle(task.title);
+    }
+  }, [task]);
   return (
-    <div>
+    <div className={styles.id__container}>
       {task ? (
         <>
-          <button
-            className={styles.button_goBack}
-            type="button"
-            onClick={() => router.back()}
-          >
-            назад
-          </button>
-          <p>{task.title}</p>
-          <p>{task.description}</p>
-          <button
-            className={styles.submit}
-            type="button"
-            onClick={() => setEdit(true)}
-          >
-            Редактировать
-          </button>
-          {edit && (
-            <>
-              <form
-                className={styles.form__container}
-                onSubmit={handleSubmit(onSubmit)}
+          <div className={styles.button__container}>
+            <button
+              className={styles.button_goBack}
+              type="button"
+              onClick={() => router.back()}
+            >
+              <svg
+                width="8"
+                height="14"
+                viewBox="0 0 8 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                <label className={styles.label__description} htmlFor="title">
-                  <textarea
-                    onInput={(event) => ChangeTitle(event)}
-                    value={title}
-                    id="title"
-                    className={styles.form__textarea}
-                    {...register("title")}
-                  />
-                </label>
-                <label
-                  className={styles.label__description}
-                  htmlFor="description"
-                >
-                  <textarea
-                    onInput={(event) => ChangeDescription(event)}
-                    value={description}
-                    id="description"
-                    className={styles.form__textarea}
-                    {...register("description")}
-                  />
-                </label>
+                <path
+                  d="M7 13L1 7L7 1"
+                  stroke="#2D2D2E"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+          <p className={styles.p__title}>{title}</p>
+          <p className={styles.p__description}>{description}</p>
+          <div className={styles.button__submitContainer}>
+            <button
+              className={styles.submit}
+              type="button"
+              onClick={() => setEdit(true)}
+            >
+              Редактировать
+            </button>
+          </div>
 
-                <button className={styles.submit} type="submit">
-                  Сахранить
-                </button>
-              </form>
-              <button
-                className={styles.submit}
-                type="submit"
-                onClick={cancellation}
-              >
-                Отмена
-              </button>
-            </>
+          {edit && (
+            <Task
+              close={close}
+              type="update"
+              id={id}
+              task={task}
+              upDate={getTask}
+            />
           )}
         </>
       ) : (

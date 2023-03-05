@@ -3,7 +3,7 @@ import moment from "moment";
 import { useCallback, useState } from "react";
 import styles from "./taskList.module.css";
 import LabelTask from "./labelTask";
-import Task from "./task";
+import Task from "./modal";
 
 function TaskList() {
   const [selectedTask, setSelectedTask] = useState(false);
@@ -17,7 +17,7 @@ function TaskList() {
   return (
     <div className={styles.taskList__container}>
       <h2>
-        На {day.format("D")}.{day.format("MM")} всего задач:{" "}
+        На {day.format("D")}.{day.format("MM")} всего задач:
         {dayTaskSelected.length}
       </h2>
       <div className={styles.tasks__container}>
@@ -36,7 +36,7 @@ function TaskList() {
       >
         Добавить новую задачу
       </button>
-      {selectedTask && <Task close={close} />}
+      {selectedTask && <Task close={close} type="save" />}
     </div>
   );
 }

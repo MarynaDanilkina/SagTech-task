@@ -12,10 +12,10 @@
   background: #f8f9f9;
 }
 .logo{
-  margin-top: 75px;
+  margin-top: 40px;
 }
 .title{
-  margin-top: 80px;
+  margin-top: 30px;
   font-family: 'Sen';
   font-style: normal;
   font-weight: 700;
@@ -31,7 +31,7 @@
   flex-direction: column;
   gap: 16px;
   margin-top: 40px;
-  margin-bottom: 207px;
+  margin-bottom: 20px;
 }
 .button{
   cursor: pointer;
