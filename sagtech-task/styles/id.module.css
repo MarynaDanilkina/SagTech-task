@@ -3,6 +3,9 @@
   border: none;
   cursor: pointer;
 }
+.button_goBack svg path{
+  stroke: var(--svg);
+}
 .id__container{
   margin-top: 20px;
   display: flex;

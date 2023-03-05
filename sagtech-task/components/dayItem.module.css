@@ -9,6 +9,7 @@
   flex-direction: column;
   justify-content: space-around;
   cursor: pointer;
+  background: var(--background);
 }
 .date__p{
   font-family: 'SF UI Display';
@@ -18,7 +19,6 @@
   line-height: 120%;
   display: flex;
   align-items: center;
-  color: #2D2D2E;
 }
 .date__pWeek{
   font-family: 'SF UI Display';
@@ -28,7 +28,6 @@
   line-height: 120%;
   display: flex;
   align-items: center;
-  color: #2D2D2E;
 }
 .orange{
   color: #ff642c;
@@ -44,6 +43,7 @@
   flex-direction: column;
   justify-content: space-around;
   cursor: pointer;
+  background: var(--background);
 }
 .status__container{
   display: flex;

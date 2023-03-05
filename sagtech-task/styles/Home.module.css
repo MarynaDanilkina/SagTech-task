@@ -9,7 +9,7 @@
   max-width: 762px;
   width: 80vw;
   top: 0px;
-  background: #f8f9f9;
+  background-color: var(--color-background);
 }
 .logo{
   margin-top: 40px;
